@@ -1,4 +1,10 @@
+import Line from "../Line";
 const Login = () => {
-  return <h1>Login</h1>;
+  return (
+    <div className="table-border">
+      <h1>Login</h1>
+      <Line />
+    </div>
+  );
 };
 export default Login;

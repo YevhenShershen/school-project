@@ -1,5 +1,21 @@
-.table-border{
+.table-border {
   border: 2px solid rgb(15, 5, 79);
   border-radius: 20px;
   margin-bottom: 10px;
+}
+.btn-header {
+  width: 150px;
+  margin-bottom: 10px;
+}
+.h100 {
+  height: 100%;
+}
+.close-btn {
+  border-radius: 100%;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.panel {
+  position: relative;
 }

@@ -1,9 +1,12 @@
 import Table from "react-bootstrap/Table";
-import './reserve-information.scss'
+import "./reserve-information.scss";
+import CloseButton from "../btns/Close-button";
 const ReserveInformation = () => {
   return (
     <div className="reserve-information table-border">
-      <h1>Reserve Information</h1>
+      <div className="panel">
+        <h1>Reserve Information</h1> <CloseButton />
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>

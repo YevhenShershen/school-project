@@ -18,12 +18,12 @@ const PersonalReserveInfo = () => {
       </ListGroup>
       <Row>
         <Col>
-          <Button variant="success" className="personal-reservation__button">
+          <Button variant="success" className="personal-reservation__button text-uppercase">
             Accept
           </Button>
         </Col>
         <Col>
-          <Button variant="danger" className="personal-reservation__button">
+          <Button variant="danger" className="personal-reservation__button text-uppercase">
             Сancel
           </Button>
         </Col>

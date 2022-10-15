@@ -14,14 +14,13 @@ function App() {
   const [workplaces] = useState(20);
   return (
     <div className="App">
-      <h1>Project</h1>
       <Container>
-        <Row>
+        <Row className="mb-2">
           <Col>
             <Registration />
           </Col>
-          <Col>
-            <Login />
+          <Col >
+            <Login/>
           </Col>
         </Row>
         {/* тут будет появлятся админ панель после лог как админ */}

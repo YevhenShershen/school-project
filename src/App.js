@@ -16,15 +16,18 @@ function App() {
   const [workplaces] = useState(20);
   const [personRegister, setPersonRegister] = useState(false);
   const [personLogin, setPersonLogin] = useState(false);
+  const [staffInfoPanel, setstaffInfoPanel] = useState(false);
+  const [reserveInfoPanel, setReserveInfoPanel] = useState(false);
   const [adminPanel, setAdminPanel] = useState(false);
   const [personInfo, setPersonInfo] = useState({
     name: "",
     surname: "",
     personId: uuidv4(),
+    workplace: null,
   });
   const [personalsInformation] = useState([
-    { name: "Admin", surname: "Admin", personId: 123 },
-    { name: "Admin2", surname: "Admin", personId: 1234 },
+    { name: "Admin", surname: "Admin", personId: 123, workplace: 5 },
+    { name: "Admin2", surname: "Admin", personId: 1234, workplace: 11 },
   ]);
   const addPerson = (el) => {
     personalsInformation.push(el);
@@ -53,17 +56,47 @@ function App() {
             />
           </Col>
         </Row>
-        {/* тут будет появлятся админ панель после лог как админ или как персонал */}
         {personRegister ? (
           <PersonalInformation
             personInfo={personInfo}
             personRegister={personRegister}
           />
         ) : null}
-        {adminPanel ? <AdminPanel /> : null}
-        {personLogin ? <Reservation workplaces={workplaces} /> : null}
-        {/* <StaffInformation />
-        <ReserveInformation /> */}
+        {adminPanel ? (
+          <AdminPanel
+            personLogin={personLogin}
+            staffInfoPanel={staffInfoPanel}
+            reserveInfoPanel={reserveInfoPanel}
+            setPersonLogin={(personLogin) => setPersonLogin(personLogin)}
+            setstaffInfoPanel={(staffInfoPanel) =>
+              setstaffInfoPanel(staffInfoPanel)
+            }
+            setReserveInfoPanel={(reserveInfoPanel) =>
+              setReserveInfoPanel(reserveInfoPanel)
+            }
+          />
+        ) : null}
+        {personLogin ? (
+          <Reservation
+            workplaces={workplaces}
+            setReserveInfoPanel={(reserveInfoPanel) =>
+              setReserveInfoPanel(reserveInfoPanel)
+            }
+            reserveInfoPanel={reserveInfoPanel}
+          />
+        ) : null}
+        {staffInfoPanel ? null : (
+          <StaffInformation
+            workplaces={workplaces}
+            personalsInformation={personalsInformation}
+          />
+        )}
+        {reserveInfoPanel ? (
+          <ReserveInformation
+            workplaces={workplaces}
+            personalsInformation={personalsInformation}
+          />
+        ) : null}
       </Container>
     </div>
   );

@@ -13,7 +13,10 @@ const Reservation = (props) => {
     <div className="reservation table-border">
       <div className="panel">
         <h1>Reservation panel</h1>
-        <CloseButton />
+        <CloseButton
+          func={props.setReserveInfoPanel}
+          item={props.reserveInfoPanel}
+        />
       </div>
       <Line />
       <Row className="px-2">

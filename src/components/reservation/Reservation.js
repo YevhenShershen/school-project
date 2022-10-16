@@ -20,12 +20,8 @@ const Reservation = (props) => {
         <Col>
           <Row className="mb-4">
             {setWorkplaces.map((el, idx) => (
-              <Col xs={3}>
-                <Button
-                  variant="primary"
-                  className="mt-4 reservation__button"
-                  key={idx}
-                >
+              <Col xs={3} key={idx}>
+                <Button variant="primary" className="mt-4 reservation__button">
                   workplaces {el}
                 </Button>
               </Col>

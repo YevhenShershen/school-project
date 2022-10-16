@@ -1,7 +1,7 @@
 import "./App.css";
 import { v4 as uuidv4 } from "uuid";
 import Registration from "./components/registration/Registration";
-import PersonalInformation from "./components/personal-info/personal-information";
+import PersonalInformation from "./components/personal-info/Personal-information";
 import Login from "./components/login/Login";
 import AdminPanel from "./components/admin-panel/Admin-panel";
 import StaffInformation from "./components/staff-information/Staff-information";

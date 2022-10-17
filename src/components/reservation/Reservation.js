@@ -1,41 +1,42 @@
-import { useState } from "react";
+import {useState} from "react";
 import "./reservation.scss";
-import PersonalReserveInfo from "../presonal-reserve-info/Personal-reserve-info";
+import PersonalReserveInfo from "../presonal-reserve-info/personal-reserve-info";
 import Line from "../Line";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import CloseButton from "../btns/Close-button";
-const Reservation = (props) => {
-  const [workplaces] = useState(props.workplaces);
-  const setWorkplaces = [...Array(workplaces).keys()].map((it) => it + 1);
-  return (
-    <div className="reservation table-border">
-      <div className="panel">
-        <h1>Reservation panel</h1>
-        <CloseButton
-          func={props.setReserveInfoPanel}
-          item={props.reserveInfoPanel}
-        />
-      </div>
-      <Line />
-      <Row className="px-2">
-        <Col>
-          <Row className="mb-4">
-            {setWorkplaces.map((el, idx) => (
-              <Col xs={3} key={idx}>
-                <Button variant="primary" className="mt-4 reservation__button">
-                  workplaces {el}
-                </Button>
-              </Col>
-            ))}
-          </Row>
-        </Col>
-        <Col>
-          <PersonalReserveInfo />
-        </Col>
-      </Row>
-    </div>
-  );
+
+const Reservation = ({workplaces, updateWorkplaces, personalsInformation}) => {
+    const [workplaceToUpdate, setWorkplaceToUpdate] = useState({})
+    return (
+        <div className="reservation table-border">
+            <div className="panel">
+                <h1>Reservation panel</h1>
+                {/*<CloseButton*/}
+                {/*  func={props.setReserveInfoPanel}*/}
+                {/*  item={props.reserveInfoPanel}*/}
+                {/*/>*/}
+            </div>
+            <Line/>
+            <Row className="px-2">
+                <Col>
+                    <Row className="mb-4">
+                        {workplaces && workplaces.map((workplace, idx) => (
+                            <Col xs={3} key={idx}>
+                                <Button onClick={() => setWorkplaceToUpdate(workplace)} variant="primary"
+                                        className="mt-4 reservation__button"
+                                        disabled={personalsInformation.find(personals => personals.workplace === workplace.element) || workplaceToUpdate.element === workplace.element || workplace.isReserved}>
+                                    {workplace.isReserved || personalsInformation.find(personals => personals.workplace === workplace.element) ? 'workplace reserved' : 'workplace'} #{workplace.element}
+                                </Button>
+                            </Col>
+                        ))}
+                    </Row>
+                </Col>
+                <Col>
+                    <PersonalReserveInfo updateWorkplaces={updateWorkplaces} workspaceToUpdate={workplaceToUpdate}/>
+                </Col>
+            </Row>
+        </div>
+    );
 };
 export default Reservation;

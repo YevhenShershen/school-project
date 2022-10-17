@@ -7,13 +7,14 @@ import AdminPanel from "./components/admin-panel/Admin-panel";
 import StaffInformation from "./components/staff-information/Staff-information";
 import ReserveInformation from "./components/reserve-information/Reserve-information";
 import Reservation from "./components/reservation/Reservation";
-import { useState } from "react";
+import {useState} from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../src/styles/main.scss";
 function App() {
   const [workplaces] = useState(20);
+  const [generatedWorkplaces, setGeneratedWorkplaces] = useState([...Array(workplaces).keys()].map((it) => ({element: it + 1, isReserved: false})));
   const [personRegister, setPersonRegister] = useState(false);
   const [personLogin, setPersonLogin] = useState(false);
   const [staffInfoPanel, setstaffInfoPanel] = useState(false);
@@ -25,12 +26,14 @@ function App() {
     personId: uuidv4(),
     workplace: null,
   });
-  const [personalsInformation] = useState([
+
+  const [personalsInformation, setPersonalInformation] = useState([
     { name: "Admin", surname: "Admin", personId: 123, workplace: 5 },
     { name: "Admin2", surname: "Admin", personId: 1234, workplace: 11 },
   ]);
+
   const addPerson = (el) => {
-    personalsInformation.push(el);
+    setPersonalInformation(prev => [...prev, el]);
   };
   return (
     <div className="App">
@@ -76,15 +79,11 @@ function App() {
             }
           />
         ) : null}
-        {personLogin ? (
-          <Reservation
-            workplaces={workplaces}
-            setReserveInfoPanel={(reserveInfoPanel) =>
-              setReserveInfoPanel(reserveInfoPanel)
-            }
-            reserveInfoPanel={reserveInfoPanel}
-          />
-        ) : null}
+        {personLogin && <Reservation
+            workplaces={generatedWorkplaces}
+            updateWorkplaces={setGeneratedWorkplaces}
+            personalsInformation={personalsInformation}
+        />}
         {staffInfoPanel ? null : (
           <StaffInformation
             workplaces={workplaces}

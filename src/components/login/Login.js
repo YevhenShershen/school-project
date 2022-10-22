@@ -3,24 +3,31 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import "./login.scss";
-const Login = (props) => {
-  const [loginPersonInfo, setLoginPersonInfo] = useState({
-    name: "",
-    personId: "",
-  });
+const Login = ({
+  loginPersonInfo,
+  setLoginPersonInfo,
+  personalsInformation,
+  personLogin,
+  setPersonLogin,
+  setAdminPanel,
+  adminPanel,
+  findpersonInfo,
+}) => {
   const [registrationInfo, setRegistrationInfo] = useState("");
   const [styleRegistration, setStyleRegistration] = useState(true);
   const [stylelogin, setStylelogin] = useState(true);
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const personInfo = props.personalsInformation.filter(
+    const personInfo = personalsInformation.filter(
       (el) => el.personId == loginPersonInfo.personId
     );
-    console.log(personInfo[0]);
+    findpersonInfo(personInfo);
+    console.log(personInfo);
+    e.preventDefault();
     if (loginPersonInfo.name == "Admin" && personInfo[0]?.name == "Admin") {
       e.target.reset();
       setRegistrationInfo("Hello Admin!");
-      props.setAdminPanel(!props.adminPanel);
+      setAdminPanel(!adminPanel);
       setStyleRegistration(true);
       setStylelogin(true);
     } else if (
@@ -29,7 +36,7 @@ const Login = (props) => {
       loginPersonInfo.personId == personInfo[0].personId
     ) {
       e.target.reset();
-      props.setPersonLogin(!props.personLogin);
+      setPersonLogin(!personLogin);
       setRegistrationInfo("Thank you for logging");
       setStylelogin(true);
       setStyleRegistration(true);

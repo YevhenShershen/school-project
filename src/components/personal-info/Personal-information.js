@@ -5,7 +5,7 @@ const PersonalInformation = (props) => {
   return (
     <div className="personal-info table-border px-2">
       <div className="panel">
-        <h2>Personal information</h2> <CloseButton />
+        <h2>Personal information</h2>
       </div>
       <Line />
       <ListGroup variant="flush">

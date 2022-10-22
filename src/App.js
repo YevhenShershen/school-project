@@ -7,14 +7,24 @@ import AdminPanel from "./components/admin-panel/Admin-panel";
 import StaffInformation from "./components/staff-information/Staff-information";
 import ReserveInformation from "./components/reserve-information/Reserve-information";
 import Reservation from "./components/reservation/Reservation";
-import {useState} from "react";
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../src/styles/main.scss";
 function App() {
+  const [loginPersonInfo, setLoginPersonInfo] = useState("");
+  const findpersonInfo = (el) => {
+    setLoginPersonInfo(el);
+  };
   const [workplaces] = useState(20);
-  const [generatedWorkplaces, setGeneratedWorkplaces] = useState([...Array(workplaces).keys()].map((it) => ({element: it + 1, isReserved: false})));
+  const [generatedWorkplaces, setGeneratedWorkplaces] = useState(
+    [...Array(workplaces).keys()].map((it) => ({
+      element: it + 1,
+      isReserved: false,
+    }))
+  );
   const [personRegister, setPersonRegister] = useState(false);
   const [personLogin, setPersonLogin] = useState(false);
   const [staffInfoPanel, setstaffInfoPanel] = useState(false);
@@ -31,9 +41,15 @@ function App() {
     { name: "Admin", surname: "Admin", personId: 123, workplace: 5 },
     { name: "Admin2", surname: "Admin", personId: 1234, workplace: 11 },
   ]);
-
   const addPerson = (el) => {
-    setPersonalInformation(prev => [...prev, el]);
+    setPersonalInformation((prev) => [...prev, el]);
+  };
+  const logout = () => {
+    setPersonLogin(false);
+    setAdminPanel(false);
+    setstaffInfoPanel(false);
+    setReserveInfoPanel(false);
+    setPersonRegister(false)
   };
   return (
     <div className="App">
@@ -52,12 +68,25 @@ function App() {
           </Col>
           <Col>
             <Login
+              findpersonInfo={findpersonInfo}
+              loginPersonInfo={loginPersonInfo}
+              setLoginPersonInfo={setLoginPersonInfo}
               personalsInformation={personalsInformation}
               personLogin={personLogin}
               setPersonLogin={(personLogin) => setPersonLogin(personLogin)}
               setAdminPanel={(adminPanel) => setAdminPanel(adminPanel)}
             />
           </Col>
+        </Row>
+        <Row>
+          <Button
+            variant="warning"
+            className="text-uppercase mb-2"
+            style={{ color: "red" }}
+            onClick={logout}
+          >
+            Logout
+          </Button>
         </Row>
         {personRegister ? (
           <PersonalInformation
@@ -79,23 +108,26 @@ function App() {
             }
           />
         ) : null}
-        {personLogin && <Reservation
+        {personLogin && (
+          <Reservation
+            loginPersonInfo={loginPersonInfo}
             workplaces={generatedWorkplaces}
             updateWorkplaces={setGeneratedWorkplaces}
             personalsInformation={personalsInformation}
-        />}
-        {staffInfoPanel ? null : (
+          />
+        )}
+        {staffInfoPanel && (
           <StaffInformation
             workplaces={workplaces}
             personalsInformation={personalsInformation}
           />
         )}
-        {reserveInfoPanel ? (
+        {reserveInfoPanel && (
           <ReserveInformation
             workplaces={workplaces}
             personalsInformation={personalsInformation}
           />
-        ) : null}
+        )}
       </Container>
     </div>
   );

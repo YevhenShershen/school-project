@@ -1,5 +1,4 @@
 import Table from "react-bootstrap/Table";
-import CloseButton from "../btns/Close-button";
 const StaffInformation = (props) => {
   const columns = props.personalsInformation.map((el, index) => (
     <tr  key={index}>
@@ -12,7 +11,7 @@ const StaffInformation = (props) => {
   return (
     <div className="table-border ">
       <div className="panel">
-        <h1>Staff Information</h1> <CloseButton />
+        <h1>Staff Information</h1>
       </div>
       <Table striped bordered hover>
         <thead>

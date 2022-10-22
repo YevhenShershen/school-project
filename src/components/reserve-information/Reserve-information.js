@@ -14,7 +14,7 @@ const ReserveInformation = (props) => {
   return (
     <div className="reserve-information table-border">
       <div className="panel">
-        <h1>Reserve Information</h1> <CloseButton />
+        <h1>Reserve Information</h1>
       </div>
       <Table striped bordered hover>
         <thead>

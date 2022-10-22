@@ -14,7 +14,7 @@ const Registration = (props) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (props.personInfo.name != "" && props.personInfo.surname != "") {
+    if (props.personInfo.name !== "" && props.personInfo.surname !== "") {
       props.setPersonRegister(!props.personRegister);
       props.addPerson(props.personInfo);
       setRegistrationInfo("Thank you for registretion");

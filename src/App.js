@@ -7,7 +7,8 @@ import AdminPanel from "./components/admin-panel/Admin-panel";
 import StaffInformation from "./components/staff-information/Staff-information";
 import ReserveInformation from "./components/reserve-information/Reserve-information";
 import Reservation from "./components/reservation/Reservation";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "./components/context";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -49,7 +50,7 @@ function App() {
     setAdminPanel(false);
     setstaffInfoPanel(false);
     setReserveInfoPanel(false);
-    setPersonRegister(false)
+    setPersonRegister(false);
   };
   return (
     <div className="App">
@@ -88,46 +89,47 @@ function App() {
             Logout
           </Button>
         </Row>
-        {personRegister ? (
-          <PersonalInformation
-            personInfo={personInfo}
-            personRegister={personRegister}
-          />
-        ) : null}
-        {adminPanel ? (
-          <AdminPanel
-            personLogin={personLogin}
-            staffInfoPanel={staffInfoPanel}
-            reserveInfoPanel={reserveInfoPanel}
-            setPersonLogin={(personLogin) => setPersonLogin(personLogin)}
-            setstaffInfoPanel={(staffInfoPanel) =>
-              setstaffInfoPanel(staffInfoPanel)
-            }
-            setReserveInfoPanel={(reserveInfoPanel) =>
-              setReserveInfoPanel(reserveInfoPanel)
-            }
-          />
-        ) : null}
-        {personLogin && (
-          <Reservation
-            loginPersonInfo={loginPersonInfo}
-            workplaces={generatedWorkplaces}
-            updateWorkplaces={setGeneratedWorkplaces}
-            personalsInformation={personalsInformation}
-          />
-        )}
-        {staffInfoPanel && (
-          <StaffInformation
-            workplaces={workplaces}
-            personalsInformation={personalsInformation}
-          />
-        )}
-        {reserveInfoPanel && (
-          <ReserveInformation
-            workplaces={workplaces}
-            personalsInformation={personalsInformation}
-          />
-        )}
+        <Context.Provider value={{ personInfo, setPersonInfo }}>
+          {personRegister ? (
+            <PersonalInformation
+                           personRegister={personRegister}
+            />
+          ) : null}
+          {adminPanel ? (
+            <AdminPanel
+              personLogin={personLogin}
+              staffInfoPanel={staffInfoPanel}
+              reserveInfoPanel={reserveInfoPanel}
+              setPersonLogin={(personLogin) => setPersonLogin(personLogin)}
+              setstaffInfoPanel={(staffInfoPanel) =>
+                setstaffInfoPanel(staffInfoPanel)
+              }
+              setReserveInfoPanel={(reserveInfoPanel) =>
+                setReserveInfoPanel(reserveInfoPanel)
+              }
+            />
+          ) : null}
+          {personLogin && (
+            <Reservation
+              loginPersonInfo={loginPersonInfo}
+              workplaces={generatedWorkplaces}
+              updateWorkplaces={setGeneratedWorkplaces}
+              personalsInformation={personalsInformation}
+            />
+          )}
+          {staffInfoPanel && (
+            <StaffInformation
+              workplaces={workplaces}
+              personalsInformation={personalsInformation}
+            />
+          )}
+          {reserveInfoPanel && (
+            <ReserveInformation
+              workplaces={workplaces}
+              personalsInformation={personalsInformation}
+            />
+          )}
+        </Context.Provider>
       </Container>
     </div>
   );

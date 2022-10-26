@@ -1,6 +1,5 @@
 import Table from "react-bootstrap/Table";
 import "./reserve-information.scss";
-import CloseButton from "../btns/Close-button";
 const ReserveInformation = (props) => {
   const columns = props.personalsInformation.map((el, index) => (
     <tr key={index}>

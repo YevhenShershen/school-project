@@ -1,6 +1,7 @@
 import Line from "../Line";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import "./registration.scss";
 const Registration = (props) => {
@@ -9,7 +10,7 @@ const Registration = (props) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     props.setPersonInfo((prev) => {
-      return { ...prev, [name]: value };
+      return { ...prev, [name]: value, personId: uuidv4() };
     });
   };
   const handleSubmit = (e) => {

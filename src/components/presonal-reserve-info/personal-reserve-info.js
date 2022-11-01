@@ -8,11 +8,23 @@ const PersonalReserveInfo = ({
   workspaceToUpdate,
   updateWorkplaces,
   loginPersonInfo,
+  setLoginPersonInfo,
+  setPersonalInformation,
+  personalsInformation,
+  workplaceToUpdate,
 }) => {
   const clickHandler = () => {
     if (!Object.keys(workspaceToUpdate)) {
       return;
     }
+    console.log(personalsInformation);
+    setPersonalInformation(
+      personalsInformation.map((person) =>
+        person.personId === loginPersonInfo.personId
+          ? { ...person, workplace: workplaceToUpdate.element }
+          : person
+      )
+    );
     updateWorkplaces((prev) =>
       prev.map((workspace) =>
         workspace.element === workspaceToUpdate.element
@@ -23,6 +35,21 @@ const PersonalReserveInfo = ({
           : workspace
       )
     );
+
+    setLoginPersonInfo({
+      ...loginPersonInfo,
+      workplace: workplaceToUpdate.element,
+    });
+  };
+  const cancelReservation = () => {
+    setPersonalInformation(
+      personalsInformation.map((person) =>
+        person.personId === loginPersonInfo.personId
+          ? { ...person, workplace: null }
+          : person
+      )
+    );
+    setLoginPersonInfo({ ...loginPersonInfo, workplace: null });
   };
   return (
     <div className="personal-reservation">
@@ -31,13 +58,13 @@ const PersonalReserveInfo = ({
           Personal reservation
         </ListGroup.Item>
         <ListGroup.Item as="li">
-          Person name: {loginPersonInfo[0].name}
+          Person name: {loginPersonInfo.name}
         </ListGroup.Item>
         <ListGroup.Item as="li">
-          Person ID: {loginPersonInfo[0].personId}
+          Person ID: {loginPersonInfo.personId}
         </ListGroup.Item>
         <ListGroup.Item as="li">
-          Person workplaces: {loginPersonInfo[0].workplace}
+          Person workplaces: {loginPersonInfo.workplace}
         </ListGroup.Item>
       </ListGroup>
       <Row>
@@ -46,14 +73,17 @@ const PersonalReserveInfo = ({
             onClick={clickHandler}
             variant="success"
             className="personal-reservation__button text-uppercase"
+            disabled={loginPersonInfo.workplace ? true : false}
           >
             Accept
           </Button>
         </Col>
         <Col>
           <Button
+            disabled={loginPersonInfo.workplace ? false : true}
             variant="danger"
             className="personal-reservation__button text-uppercase"
+            onClick={() => cancelReservation()}
           >
             Сancel
           </Button>

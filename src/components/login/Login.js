@@ -20,11 +20,11 @@ const Login = ({
   const handleSubmit = (e) => {
     const personInfo = personalsInformation.filter(
       (el) => el.personId == loginPersonInfo.personId
-    );
+    )[0];
     findpersonInfo(personInfo);
     console.log(personInfo);
     e.preventDefault();
-    if (loginPersonInfo.name == "Admin" && personInfo[0]?.name == "Admin") {
+    if (loginPersonInfo.name == "Admin" && personInfo?.name == "Admin") {
       e.target.reset();
       setRegistrationInfo("Hello Admin!");
       setAdminPanel(!adminPanel);
@@ -32,8 +32,8 @@ const Login = ({
       setStylelogin(true);
     } else if (
       personInfo != [] &&
-      loginPersonInfo.name == personInfo[0]?.name &&
-      loginPersonInfo.personId == personInfo[0].personId
+      loginPersonInfo.name == personInfo?.name &&
+      loginPersonInfo.personId == personInfo.personId
     ) {
       e.target.reset();
       setPersonLogin(!personLogin);

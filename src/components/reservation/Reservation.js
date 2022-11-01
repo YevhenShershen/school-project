@@ -53,7 +53,7 @@ const Reservation = ({
         </Col>
         <Col>
           <PersonalReserveInfo
-          workplaceToUpdate={workplaceToUpdate}
+            workplaceToUpdate={workplaceToUpdate}
             setPersonalInformation={setPersonalInformation}
             personalsInformation={personalsInformation}
             setLoginPersonInfo={setLoginPersonInfo}

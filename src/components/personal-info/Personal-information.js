@@ -2,9 +2,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Line from "../Line";
 import { Context } from "../context";
 import { useContext } from "react";
-const PersonalInformation = (props) => {
+const PersonalInformation = () => {
   const { personInfo } = useContext(Context);
-  console.log(personInfo);
   return (
     <div className="personal-info table-border px-2">
       <div className="panel">

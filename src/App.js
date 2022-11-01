@@ -91,9 +91,7 @@ function App() {
         </Row>
         <Context.Provider value={{ personInfo, setPersonInfo }}>
           {personRegister ? (
-            <PersonalInformation
-                           personRegister={personRegister}
-            />
+            <PersonalInformation personRegister={personRegister} />
           ) : null}
           {adminPanel ? (
             <AdminPanel
@@ -111,6 +109,8 @@ function App() {
           ) : null}
           {personLogin && (
             <Reservation
+              setPersonalInformation={setPersonalInformation}
+              setLoginPersonInfo={setLoginPersonInfo}
               loginPersonInfo={loginPersonInfo}
               workplaces={generatedWorkplaces}
               updateWorkplaces={setGeneratedWorkplaces}

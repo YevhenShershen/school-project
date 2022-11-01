@@ -10,7 +10,9 @@ const Reservation = ({
   workplaces,
   updateWorkplaces,
   personalsInformation,
-  loginPersonInfo
+  loginPersonInfo,
+  setLoginPersonInfo,
+  setPersonalInformation,
 }) => {
   const [workplaceToUpdate, setWorkplaceToUpdate] = useState({});
   return (
@@ -24,7 +26,7 @@ const Reservation = ({
           <Row className="mb-4">
             {workplaces &&
               workplaces.map((workplace, idx) => (
-                <Col xs={3} key={idx}>
+                <Col xs={3} key={idx} className={idx + 1}>
                   <Button
                     onClick={() => setWorkplaceToUpdate(workplace)}
                     variant="primary"
@@ -51,6 +53,10 @@ const Reservation = ({
         </Col>
         <Col>
           <PersonalReserveInfo
+          workplaceToUpdate={workplaceToUpdate}
+            setPersonalInformation={setPersonalInformation}
+            personalsInformation={personalsInformation}
+            setLoginPersonInfo={setLoginPersonInfo}
             loginPersonInfo={loginPersonInfo}
             updateWorkplaces={updateWorkplaces}
             workspaceToUpdate={workplaceToUpdate}

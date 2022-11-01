@@ -7,7 +7,7 @@ import AdminPanel from "./components/admin-panel/Admin-panel";
 import StaffInformation from "./components/staff-information/Staff-information";
 import ReserveInformation from "./components/reserve-information/Reserve-information";
 import Reservation from "./components/reservation/Reservation";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Context } from "./components/context";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -34,7 +34,7 @@ function App() {
   const [personInfo, setPersonInfo] = useState({
     name: "",
     surname: "",
-    personId: uuidv4(),
+    personId: "",
     workplace: null,
   });
 

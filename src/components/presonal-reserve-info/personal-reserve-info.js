@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const PersonalReserveInfo = ({
+  workplaces,
   workspaceToUpdate,
   updateWorkplaces,
   loginPersonInfo,
@@ -17,7 +18,6 @@ const PersonalReserveInfo = ({
     if (!Object.keys(workspaceToUpdate)) {
       return;
     }
-    console.log(personalsInformation);
     setPersonalInformation(
       personalsInformation.map((person) =>
         person.personId === loginPersonInfo.personId
@@ -50,6 +50,12 @@ const PersonalReserveInfo = ({
       )
     );
     setLoginPersonInfo({ ...loginPersonInfo, workplace: null });
+    //cancel reservation
+    updateWorkplaces( workplaces.map((workplace) =>
+    workplace.element === loginPersonInfo.workplace
+      ? { ...workplace, isReserved: false }
+      : workplace
+  ))
   };
   return (
     <div className="personal-reservation">

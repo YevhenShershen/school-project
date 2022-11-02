@@ -22,7 +22,6 @@ const Login = ({
       (el) => el.personId == loginPersonInfo.personId
     )[0];
     findpersonInfo(personInfo);
-    console.log(personInfo);
     e.preventDefault();
     if (loginPersonInfo.name == "Admin" && personInfo?.name == "Admin") {
       e.target.reset();

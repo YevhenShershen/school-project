@@ -1,5 +1,4 @@
 import "./App.css";
-import { v4 as uuidv4 } from "uuid";
 import Registration from "./components/registration/Registration";
 import PersonalInformation from "./components/personal-info/Personal-information";
 import Login from "./components/login/Login";
@@ -14,6 +13,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../src/styles/main.scss";
+import Egzamin from "./components/egzamin/Egzamin";
 function App() {
   const [loginPersonInfo, setLoginPersonInfo] = useState("");
   const findpersonInfo = (el) => {
@@ -130,6 +130,7 @@ function App() {
             />
           )}
         </Context.Provider>
+        <Egzamin />
       </Container>
     </div>
   );
